@@ -1,0 +1,20 @@
+.date-and-reference-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reference-number {
+  margin-right: 15%;
+}
+
+.total-and-buy-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 32px;
+}
+
+.total-label {
+  margin-bottom: 48px;
+}

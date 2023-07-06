@@ -10,4 +10,6 @@ margin-bottom: 12px;
 
 .logout-button {
     margin-left: 25%;
+    cursor: pointer;
 }
+
