@@ -1,15 +1,29 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  BrowserRouter,
+  createBrowserRouter,
+  RouterProvider,
+  Routes,
+  Route,
+} from "react-router-dom";
+import { LoginScreen } from "../components/auth/LoginScreen";
+
 import ErrorPage from "./ErrorPage";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <div>Hello world!</div>,
-    errorElement: <ErrorPage />,
-  },
-]);
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <LoginScreen />,
+//     errorElement: <ErrorPage />,
+//   },
+// ]);
 
 export const AppRouter = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginScreen />} />
+      </Routes>
+    </BrowserRouter>
+  );
 };
