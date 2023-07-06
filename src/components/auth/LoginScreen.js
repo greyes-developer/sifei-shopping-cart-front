@@ -27,7 +27,7 @@ export const LoginScreen = () => {
           <input
             type="text"
             name="user"
-            placeholder="Type your user"
+            placeholder="Usuario"
             value={user}
             onChange={handleInputChange}
           />
@@ -37,7 +37,7 @@ export const LoginScreen = () => {
           <input
             type="text"
             name="password"
-            placeholder="Type your password"
+            placeholder="Contraseña"
             value={password}
             onChange={handleInputChange}
           />
