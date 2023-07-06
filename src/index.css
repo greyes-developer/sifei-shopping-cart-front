@@ -35,3 +35,7 @@ body {
   justify-content: center;
   width: 100%;
 }
+
+.root-container {
+  background: rgba(0, 0, 0, 0.8);
+}

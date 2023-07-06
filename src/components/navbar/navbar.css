@@ -1,0 +1,13 @@
+.navbar-container {
+margin-top: 24px;
+margin-bottom: 12px;
+}
+
+.navbar-menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logout-button {
+    margin-left: 25%;
+}

@@ -1,0 +1,13 @@
+.card-product {
+    max-width: 500px;
+}
+
+.price-add-container {
+    display: flex;
+    align-items: center;
+}
+
+.price {
+    margin-right: 35%;
+    margin-top: 12px;
+}
