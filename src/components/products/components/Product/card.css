@@ -30,3 +30,11 @@
 .quantity {
   display: inherit;
 }
+
+.product-card {
+  padding: 4px;
+}
+
+.card-img-top-product {
+  width: 100%;
+}

@@ -20,14 +20,13 @@ export const startLogin = (user, password) => {
   return async (dispatch) => {
     dispatch(loginLoading());
 
-    const resp = await login(user, password);
-    
-    if (resp && resp.status === "success") {
-      localStorage.setItem("is-authenticated", true);
-      dispatch(loginSuccess(resp.data));
+    const result = await login(user, password);
+
+    if (result && result.status === "success") {
+      dispatch(loginSuccess(result.data));
     } else {
-      Swal.fire("Error", resp.message, "error");
-      dispatch(loginError(resp.data));
+      Swal.fire("Error", result.message, "error");
+      dispatch(loginError(result.data));
     }
   };
 };
@@ -38,7 +37,7 @@ const logoutSuccess = () => ({
 
 export const logout = () => {
   return (dispatch) => {
-    localStorage.removeItem("is-authenticated");
+    localStorage.clear();
     dispatch(logoutSuccess());
   };
 };
