@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { startLogin } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
@@ -10,6 +10,8 @@ export const LoginScreen = () => {
     user: "",
     password: "",
   });
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -23,30 +25,45 @@ export const LoginScreen = () => {
 
   return (
     <div className="container text-center login-container">
-      <h3 className="shopping-title">Carrito de compras</h3>
+      <h3 className="h3">Carrito de compras</h3>
 
       <form onSubmit={handleLogin}>
-        <div className="key-fields-container">
-          <p className="key-field-form">Usuario</p>
+        <div className="mb-3">
+          <label className="form-label">Usuario</label>
           <input
             type="text"
+            className="form-control"
             name="user"
             placeholder="Usuario"
             value={user}
             onChange={handleInputChange}
+            aria-describedby="userHelp"
           />
         </div>
-        <div className="key-fields-container">
-          <p className="key-field-form">Contraseña</p>
-          <input
-            type="text"
-            name="password"
-            placeholder="Contraseña"
-            value={password}
-            onChange={handleInputChange}
-          />
+        <div className="mb-3">
+          <label className="form-label">Contraseña</label>
+          <div className="password-container">
+            <input
+              type={isPasswordVisible ? "text" : "password"}
+              name="password"
+              placeholder="Contraseña"
+              value={password}
+              onChange={handleInputChange}
+              className="form-control"
+            />
+            <i
+              className={
+                !isPasswordVisible
+                  ? "far fa-eye-slash password-icon eye-icon"
+                  : "far fa-eye password-icon eye-icon"
+              }
+              onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+            ></i>
+          </div>
         </div>
-        <input type="submit" className="btnSubmit" value="Iniciar sesión" />
+        <button type="submit" className="btn btn-primary">
+          Iniciar sesión
+        </button>
       </form>
     </div>
   );
