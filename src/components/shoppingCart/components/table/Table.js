@@ -17,7 +17,7 @@ export const ProductsTable = ({ data = [], handleDelete }) => {
         {data && data.length > 0
           ? data.map((item, i) => {
               return (
-                <tr>
+                <tr key={`${i}`}>
                   <th scope="row">{item.id_producto}</th>
                   <td>{item.nombre_producto}</td>
                   <td>${item.precio_unitario}</td>
