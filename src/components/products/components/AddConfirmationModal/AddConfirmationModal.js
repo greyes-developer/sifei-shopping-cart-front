@@ -30,7 +30,7 @@ export const AddConfirmationModal = ({
       quantityToBuy: quantityToBuy >= 0 ? Number(quantityToBuy) : 0,
       total: getTotal(),
     };
-    console.log("holaaa")
+
     addProduct(body);
   };
 
@@ -41,6 +41,7 @@ export const AddConfirmationModal = ({
       handleRightButton={addProductToTheShoppingCart}
       leftButtonText="Cancelar"
       rightButtonText="Agregar al carrito de compra"
+      isRightButtonEnabled={quantityToBuy <= props.cantidad_disponible}
     >
       <div className="product-information-container">
         <p>Producto: {props.nombre_producto}</p>

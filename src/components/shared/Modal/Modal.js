@@ -7,6 +7,7 @@ export const Modal = ({
   rightButtonText = "",
   handleLeftButton,
   handleRightButton,
+  isRightButtonEnabled = true,
   show,
   children,
 }) => {
@@ -25,9 +26,11 @@ export const Modal = ({
             {leftButtonText}
           </button>
           <button
-            className="btn btn-primary"
+            className={`btn ${
+              isRightButtonEnabled ? "btn-primary" : "btn-secondary"
+            }`}
             type="button"
-            onClick={handleRightButton}
+            onClick={isRightButtonEnabled ? handleRightButton : null}
           >
             {rightButtonText}
           </button>

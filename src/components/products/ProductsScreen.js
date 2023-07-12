@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../actions/products";
+import {
+  getProducts,
+  addProduct as addProductAction,
+} from "../../actions/products";
 import { NavBar } from "../navbar/Navbar";
 import { ProductCard } from "./components/Product/Card";
 
@@ -10,6 +13,8 @@ export const ProductsScreen = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.products?.data);
   const userData = useSelector((state) => state.auth?.data);
+
+  console.log(`data: ${JSON.stringify(data, null, 3)}`);
 
   const addProduct = (item) => {
     const localStorageKey = `${userData?.id_usuario}-${userData?.nombre_usuario}`;
@@ -22,6 +27,7 @@ export const ProductsScreen = () => {
     else localStorageValue = JSON.stringify([item]);
 
     localStorage.setItem(localStorageKey, localStorageValue);
+    dispatch(addProductAction(item));
   };
 
   useEffect(() => {

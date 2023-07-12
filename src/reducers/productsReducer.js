@@ -25,6 +25,20 @@ export const productsReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
+    case productTypes.ADD_PRODUCT:
+      return {
+        ...state,
+        data: state.data.map((item) => {
+          if (item.id_producto === action.payload.id_producto) {
+            return {
+              ...item,
+              cantidad_disponible:
+                item.cantidad_disponible - action.payload.quantityToBuy,
+            };
+          }
+          return item;
+        }),
+      };
     default:
       return state;
   }

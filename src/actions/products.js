@@ -30,3 +30,8 @@ export const getProducts = () => {
     }
   };
 };
+
+export const addProduct = (payload) => ({
+  type: productTypes.ADD_PRODUCT,
+  payload,
+});
