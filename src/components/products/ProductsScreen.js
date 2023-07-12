@@ -14,8 +14,6 @@ export const ProductsScreen = () => {
   const data = useSelector((state) => state.products?.data);
   const userData = useSelector((state) => state.auth?.data);
 
-  console.log(`data: ${JSON.stringify(data, null, 3)}`);
-
   const addProduct = (item) => {
     const localStorageKey = `${userData?.id_usuario}-${userData?.nombre_usuario}`;
     const getLocalStorageData = localStorage.getItem(localStorageKey);

@@ -24,7 +24,10 @@ export const ProductsTable = ({ data = [], handleDelete }) => {
                   <td>{item.cantidad_disponible}</td>
                   <td>${item.precio_unitario}</td>
                   <td>
-                    <button className="btn btn-danger" onClick={handleDelete}>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => handleDelete(item)}
+                    >
                       Eliminar
                     </button>
                   </td>

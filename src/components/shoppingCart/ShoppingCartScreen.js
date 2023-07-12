@@ -1,16 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar } from "./components/navbar/Navbar";
 import { ProductsTable } from "./components/table/Table";
-import { products_data } from "../../mock/products";
 
 import "./shoppingCart.css";
+import { useSelector } from "react-redux";
 
 export const ShoppingCartScreen = () => {
   const todayDate = new Date().toLocaleDateString();
+  const user = useSelector((state) => state.auth?.data);
   const referenceNumber = "123";
 
-  const deleteProductFromShoppingCart = () => {
-    console.log("delete product");
+  const localStorageKey = `${user?.id_usuario}-${user?.nombre_usuario}`;
+  const resultLocalStorage = localStorage.getItem(localStorageKey);
+  const resultLocalStorageParsed = JSON.parse(resultLocalStorage);
+  const [products, setProducts] = useState(resultLocalStorageParsed);
+
+  const [deleteProductCounter, setDeleteProductCounter] = useState(1);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const res = localStorage.getItem(localStorageKey);
+    const resParsed = JSON.parse(res);
+    setProducts(resParsed);
+
+    let totalResult = 0;
+    resParsed.forEach((element) => {
+      totalResult += element?.total;
+    });
+    setTotal(totalResult);
+  }, [deleteProductCounter, user]);
+
+  const deleteProductFromShoppingCart = (item) => {
+    const result = products?.filter((element) => {
+      return element.id_producto !== item.id_producto;
+    });
+
+    const localStorageValue = JSON.stringify(result);
+    localStorage.setItem(localStorageKey, localStorageValue);
+    setDeleteProductCounter((value) => value + 1);
   };
 
   return (
@@ -25,12 +52,12 @@ export const ShoppingCartScreen = () => {
       </div>
 
       <ProductsTable
-        data={products_data}
+        data={products}
         handleDelete={deleteProductFromShoppingCart}
       />
 
       <div className="total-and-buy-container">
-        <p className="total-label">Total: $1000,000.00</p>
+        <p className="total-label">Total: ${total}</p>
         <button className="btn btn-primary">Comprar</button>
       </div>
     </div>
