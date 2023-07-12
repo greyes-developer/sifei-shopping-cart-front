@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { startLogin } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
 
 import "../auth/login.css";
@@ -9,11 +11,13 @@ export const LoginScreen = () => {
     password: "",
   });
 
+  const dispatch = useDispatch();
+
   const { user, password } = formValues;
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log("handleLogin user: ", user);
+    dispatch(startLogin(user, password));
     resetForm();
   };
 
