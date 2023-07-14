@@ -3,23 +3,25 @@ import { Modal } from "../../../shared/Modal/Modal";
 
 import "./modal.css";
 
-export const DeleteConfirmationModal = ({
+export const PurchaseConfirmationModal = ({
   isModalVisible,
   hideModal,
-  handleDeleteProducts,
-  productName,
+  handleBuyProducts,
+  total,
 }) => {
   return (
     <Modal
       show={isModalVisible}
       handleLeftButton={hideModal}
-      handleRightButton={handleDeleteProducts}
+      handleRightButton={handleBuyProducts}
       leftButtonText="Cancelar"
-      rightButtonText="Eliminar producto"
+      rightButtonText="Confirmar compra"
     >
       <div className="confirmation-modal-container">
-        <h2 className="title">Eliminar</h2>
-        <h4 className="description">Está a punto de eliminar {productName}</h4>
+        <h2 className="title">Compra</h2>
+        <h4 className="description">
+          Está a punto de realizar una compra por el total de ${total}
+        </h4>
       </div>
     </Modal>
   );

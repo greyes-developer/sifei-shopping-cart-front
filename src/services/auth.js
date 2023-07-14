@@ -5,7 +5,7 @@ export const login = (user, password) => {
     nombre: user,
     clave: password,
   };
-  console.log(JSON.stringify(body, null, 3))
+  
   return fetch(`${API_URL}/login`, {
     method: "POST",
     headers: {

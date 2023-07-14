@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { LoginScreen } from "../components/auth/LoginScreen";
 import { ProductsScreen } from "../components/products/ProductsScreen";
@@ -11,7 +11,6 @@ import { Protected } from "./Protected";
 
 export const AppRouter = () => {
   const { authenticated } = useSelector((state) => state.auth);
-  console.log(`Estado del usuario: ${authenticated}`);
 
   return (
     <BrowserRouter>

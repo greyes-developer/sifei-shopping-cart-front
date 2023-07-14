@@ -4,6 +4,8 @@ const initialState = {
   data: [],
   loading: true,
   error: null,
+  buyProductsLoading: false,
+  buyProductsError: null,
 };
 
 export const productsReducer = (state = initialState, action) => {
@@ -38,6 +40,22 @@ export const productsReducer = (state = initialState, action) => {
           }
           return item;
         }),
+      };
+    case productTypes.BUY_PRODUCTS_LOADING:
+      return {
+        ...state,
+        buyProductsLoading: true,
+      };
+    case productTypes.BUY_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        buyProductsLoading: false,
+      };
+    case productTypes.BUY_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        buyProductsLoading: false,
+        buyProductsError: action.payload,
       };
     default:
       return state;

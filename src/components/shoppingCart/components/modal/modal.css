@@ -1,0 +1,14 @@
+.confirmation-modal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin-top: 16pxpx;
+  margin-bottom: 24px;
+}
+
+.description {
+  margin-bottom: 16px;
+}

@@ -1,12 +1,17 @@
 import React from "react";
+import { Row } from "./Row";
 
 export const ProductsTable = ({ data = [], handleDelete }) => {
+  const deleteProductFromTable = (item) => {
+    handleDelete(item);
+  };
+
   return (
     <table className="table">
       <thead>
         <tr>
           <th scope="col">Clave</th>
-          <th scope="col">Descripcion</th>
+          <th scope="col">Descripción</th>
           <th scope="col">Precio unitario</th>
           <th scope="col">Cantidad</th>
           <th scope="col">Importe</th>
@@ -17,21 +22,11 @@ export const ProductsTable = ({ data = [], handleDelete }) => {
         {data && data.length > 0
           ? data.map((item, i) => {
               return (
-                <tr key={`${i}`}>
-                  <th scope="row">{item.id_producto}</th>
-                  <td>{item.nombre_producto}</td>
-                  <td>${item.precio_unitario}</td>
-                  <td>{item.cantidad_disponible}</td>
-                  <td>${item.precio_unitario}</td>
-                  <td>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => handleDelete(item)}
-                    >
-                      Eliminar
-                    </button>
-                  </td>
-                </tr>
+                <Row
+                  index={i}
+                  item={item}
+                  deleteProductFromTable={deleteProductFromTable}
+                />
               );
             })
           : null}
