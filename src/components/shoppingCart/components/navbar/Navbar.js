@@ -1,12 +1,12 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logout } from "../../../../actions/auth";
 
 import "./navbar.css";
 
 export const Navbar = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth?.data);
+  const userName = localStorage.getItem("nombre_usuario");
 
   const handleLogout = () => {
     dispatch(logout());
@@ -18,7 +18,7 @@ export const Navbar = () => {
       <p className="logout-button" onClick={() => handleLogout()}>
         Cerrar sesión
       </p>
-      <p>Nombre del cliente: {user?.nombre_usuario}</p>
+      <p>Nombre del cliente: {userName}</p>
     </div>
   );
 };

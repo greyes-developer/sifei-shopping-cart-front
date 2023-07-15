@@ -20,13 +20,16 @@ export const startLogin = (user, password) => {
   return async (dispatch) => {
     dispatch(loginLoading());
 
-    const result = await login(user, password);
+    const { data } = await login(user, password);
 
-    if (result && result.status === "success") {
-      dispatch(loginSuccess(result.data));
+    if (data && data?.status === "success") {
+      localStorage.setItem("x-token", data?.token);
+      localStorage.setItem("id_usuario", data?.data?.id_usuario);
+      localStorage.setItem("nombre_usuario", data?.data?.nombre_usuario);
+      dispatch(loginSuccess(data?.data));
     } else {
-      Swal.fire("Error", result.message, "error");
-      dispatch(loginError(result.data));
+      Swal.fire("Error", data?.message, "error");
+      dispatch(loginError(data?.data));
     }
   };
 };
@@ -37,6 +40,19 @@ const logoutSuccess = () => ({
 
 export const logout = () => {
   return (dispatch) => {
+    localStorage.clear();
+    dispatch(logoutSuccess());
+  };
+};
+
+export const logoutTokenExpired = () => {
+  return (dispatch) => {
+    Swal.fire({
+      title: "Token expirado.",
+      html: "<p>Vuelve a iniciar sesión.</p>",
+      timer: 3000,
+      timerProgressBar: true,
+    });
     localStorage.clear();
     dispatch(logoutSuccess());
   };

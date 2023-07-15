@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DeleteConfirmationModal } from "../modal/DeleteConfirmationModal";
 
-export const Row = ({ index, item, deleteProductFromTable }) => {
+export const Row = ({ item, deleteProductFromTable }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -25,7 +25,7 @@ export const Row = ({ index, item, deleteProductFromTable }) => {
         handleDeleteProducts={() => handleDeleteProducts(item)}
         productName={item.nombre_producto}
       />
-      <tr key={`${index}`}>
+      <tr>
         <th scope="row">{item.id_producto}</th>
         <td>{item.nombre_producto}</td>
         <td>${item.precio_unitario}</td>

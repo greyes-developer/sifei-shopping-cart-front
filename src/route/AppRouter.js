@@ -5,11 +5,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LoginScreen } from "../components/auth/LoginScreen";
 import { ProductsScreen } from "../components/products/ProductsScreen";
 import { ShoppingCartScreen } from "../components/shoppingCart/ShoppingCartScreen";
+import { getXToken } from "../config/localStorage";
 import ErrorPage from "./ErrorPage";
 import { NoProtected } from "./NoProtected";
 import { Protected } from "./Protected";
 
 export const AppRouter = () => {
+  const token = getXToken();
   const { authenticated } = useSelector((state) => state.auth);
 
   return (
@@ -18,7 +20,7 @@ export const AppRouter = () => {
         <Route
           path="/login"
           element={
-            <NoProtected isAuthenticated={authenticated}>
+            <NoProtected isAuthenticated={authenticated || token}>
               <LoginScreen />
             </NoProtected>
           }
@@ -27,7 +29,7 @@ export const AppRouter = () => {
         <Route
           path="shopping-cart"
           element={
-            <Protected isAuthenticated={authenticated} exact>
+            <Protected isAuthenticated={authenticated || token} exact>
               <ShoppingCartScreen />
             </Protected>
           }
@@ -35,7 +37,7 @@ export const AppRouter = () => {
         <Route
           path="/"
           element={
-            <Protected isAuthenticated={authenticated}>
+            <Protected isAuthenticated={authenticated || token}>
               <ProductsScreen />
             </Protected>
           }

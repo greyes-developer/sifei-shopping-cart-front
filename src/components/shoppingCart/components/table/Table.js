@@ -23,7 +23,7 @@ export const ProductsTable = ({ data = [], handleDelete }) => {
           ? data.map((item, i) => {
               return (
                 <Row
-                  index={i}
+                  key={`${i}`}
                   item={item}
                   deleteProductFromTable={deleteProductFromTable}
                 />

@@ -4,6 +4,7 @@ import {
   getProductsService,
   postBuyProductsService,
 } from "../services/products";
+import { logoutTokenExpired } from "./auth";
 
 const getProductsLoading = () => ({
   type: productTypes.GET_PRODUCTS_LOADING,
@@ -23,13 +24,20 @@ export const getProducts = () => {
   return async (dispatch) => {
     dispatch(getProductsLoading());
 
-    const result = await getProductsService();
+    try {
+      const { data } = await getProductsService();
+      if (data && data?.status === "success") {
+        dispatch(getProductsSuccess(data?.data));
+      }
+    } catch (error) {
+      const { status, statusText, data } = error;
 
-    if (result && result.status === "success") {
-      dispatch(getProductsSuccess(result.data));
-    } else {
-      Swal.fire("Error", result.message, "error");
-      dispatch(getProductsError(result.data));
+      if (status === 401 && statusText === "Unauthorized") {
+        dispatch(logoutTokenExpired());
+      } else {
+        Swal.fire("Error", data?.message, "error");
+        dispatch(getProductsError(data));
+      }
     }
   };
 };
@@ -56,14 +64,22 @@ export const buyProducts = (payload) => {
   return async (dispatch) => {
     dispatch(buyProductsLoading());
 
-    const result = await postBuyProductsService(payload);
+    try {
+      const { data } = await postBuyProductsService(payload);
 
-    if (result && result.status === "success") {
-      dispatch(buyProductsSuccess());
-      Swal.fire("Operación exitosa", result.data?.mensaje, "success");
-    } else {
-      Swal.fire("Error", `${JSON.stringify(result?.message)}`, "error");
-      dispatch(buyProductsError(result));
+      if (data && data.status === "success") {
+        dispatch(buyProductsSuccess());
+        Swal.fire("Operación exitosa", data.data?.mensaje, "success");
+      }
+    } catch (error) {
+      const { status, statusText, data } = error;
+
+      if (status === 401 && statusText === "Unauthorized") {
+        dispatch(logoutTokenExpired());
+      } else {
+        Swal.fire("Error", data?.message, "error");
+        dispatch(buyProductsError(data));
+      }
     }
   };
 };

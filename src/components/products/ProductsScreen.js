@@ -30,7 +30,7 @@ export const ProductsScreen = () => {
 
   useEffect(() => {
     dispatch(getProducts());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="container">

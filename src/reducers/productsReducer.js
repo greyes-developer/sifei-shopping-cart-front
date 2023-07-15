@@ -51,7 +51,7 @@ export const productsReducer = (state = initialState, action) => {
         ...state,
         buyProductsLoading: false,
       };
-    case productTypes.BUY_PRODUCTS_SUCCESS:
+    case productTypes.BUY_PRODUCTS_ERROR:
       return {
         ...state,
         buyProductsLoading: false,

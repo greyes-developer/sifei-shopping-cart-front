@@ -79,10 +79,6 @@ export const ShoppingCartScreen = () => {
     });
   };
 
-  const thereIsNoProducts = () => {
-    return;
-  };
-
   return (
     <div className="container">
       <Navbar />

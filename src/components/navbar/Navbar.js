@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../actions/auth";
 import "./navbar.css";
@@ -7,7 +7,7 @@ import "./navbar.css";
 export const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const data = useSelector((state) => state.auth);
+  const userName = localStorage.getItem("nombre_usuario");
 
   const handleLogout = () => {
     dispatch(logout());
@@ -21,7 +21,7 @@ export const NavBar = () => {
     <div className="navbar-container">
       <h2>Productos</h2>
       <div className="navbar-menu">
-        <p>Cliente: {data?.data.nombre_usuario}</p>
+        <p>Cliente: {userName}</p>
         <p className="logout-button" onClick={() => handleLogout()}>
           Cerrar sesión
         </p>

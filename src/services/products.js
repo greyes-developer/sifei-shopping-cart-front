@@ -1,16 +1,16 @@
-const API_URL = "http://localhost:4000"; //Implement in a env file
+import { axiosInstance } from "../config/axios";
 
 export const getProductsService = () => {
-  return fetch(`${API_URL}/api/products`).then((res) => res.json());
+  return axiosInstance()(`api/products`);
 };
 
 export const postBuyProductsService = (body) => {
-
-  return fetch(`${API_URL}/api/buy`, {
-    method: "POST",
+  return axiosInstance()({
+    method: "post",
+    url: "api/buy",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(body),
-  }).then((res) => res.json());
+    data: body,
+  });
 };
