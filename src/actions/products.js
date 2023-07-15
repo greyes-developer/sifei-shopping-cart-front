@@ -62,12 +62,14 @@ const buyProductsError = (payload) => ({
 
 export const buyProducts = (payload) => {
   return async (dispatch) => {
+    const localStorageKey = `${payload.id_usuario}-${payload.nombre_usuario}`;
     dispatch(buyProductsLoading());
 
     try {
       const { data } = await postBuyProductsService(payload);
 
       if (data && data.status === "success") {
+        localStorage.removeItem(localStorageKey);
         dispatch(buyProductsSuccess());
         Swal.fire("Operación exitosa", data.data?.mensaje, "success");
       }

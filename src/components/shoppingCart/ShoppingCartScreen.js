@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { uid } from "uid";
 import { useDispatch, useSelector } from "react-redux";
 import { buyProducts } from "../../actions/products";
 import { PurchaseConfirmationModal } from "./components/modal/PurchaseConfirmationModal";
@@ -11,8 +12,9 @@ import "./shoppingCart.css";
 export const ShoppingCartScreen = () => {
   const todayDate = new Date().toLocaleDateString();
   const user = useSelector((state) => state.auth?.data);
+  const { buyProductsLoading } = useSelector((state) => state?.products);
   const dispatch = useDispatch();
-  const referenceNumber = "123";
+  const referenceNumber = uid();
   const [isPurchaseModalVisible, setIsPurchaseModalVisible] = useState(false);
 
   const localStorageKey = `${user?.id_usuario}-${user?.nombre_usuario}`;
@@ -33,7 +35,7 @@ export const ShoppingCartScreen = () => {
       totalResult += element?.total;
     });
     setTotal(totalResult);
-  }, [deleteProductCounter, user, localStorageKey]);
+  }, [deleteProductCounter, user, localStorageKey, buyProductsLoading]);
 
   const deleteProductFromTable = (item) => {
     const result = products?.filter((element) => {
