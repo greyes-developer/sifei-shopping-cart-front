@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getXToken } from "./localStorage";
 
-const API_URL = "http://localhost:4000/";
+const API_URL = process.env.REACT_APP_API_URL;
 
 export const axiosInstance = (useToken = true) => {
   let config = {};
@@ -29,15 +29,6 @@ export const axiosInstance = (useToken = true) => {
       return response;
     },
     function (error) {
-      // if (
-      //   err.response.status === 401 &&
-      //   err.response.statusText === "Unauthorized"
-      // ) {
-      //   err.response = {
-      //     ...err.response,
-      //     errorAction: "TokenOutdated",
-      //   };
-      // }
       return Promise.reject(error.response);
     }
   );
