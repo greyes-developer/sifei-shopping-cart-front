@@ -20,7 +20,7 @@ export const PurchaseConfirmationModal = ({
       <div className="confirmation-modal-container">
         <h2 className="title">Compra</h2>
         <h4 className="description">
-          Está a punto de realizar una compra por el total de ${total}
+          Estás a punto de realizar una compra por el total de ${total}
         </h4>
       </div>
     </Modal>

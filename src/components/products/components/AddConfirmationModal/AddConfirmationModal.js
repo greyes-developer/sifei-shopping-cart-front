@@ -9,9 +9,26 @@ export const AddConfirmationModal = ({
   ...props
 }) => {
   const [quantityToBuy, setQuantityToBuy] = useState(1);
+  const [infoMessage, setInfoMessage] = useState("");
 
   const handleQuantityValue = ({ target }) => {
-    setQuantityToBuy(target.value);
+    const value = target.value;
+
+    setQuantityToBuy(value);
+
+    if (value && Number(value) === "NaN") {
+      setInfoMessage("El valor debe ser numérico.");
+    } else if (value.length === 0 || Number(value) === 0) {
+      setInfoMessage("Debes agregar al menos 1 unidad.");
+    } else if (
+      value.length > 0 &&
+      Number(value) > 0 &&
+      Number(value) <= props.cantidad_disponible
+    ) {
+      setInfoMessage("");
+    } else {
+      setInfoMessage("El valor debe ser menor a la cantidad disponible.");
+    }
   };
 
   const getTotal = () => {
@@ -41,7 +58,7 @@ export const AddConfirmationModal = ({
       handleRightButton={addProductToTheShoppingCart}
       leftButtonText="Cancelar"
       rightButtonText="Agregar al carrito de compra"
-      isRightButtonEnabled={quantityToBuy <= props.cantidad_disponible}
+      isRightButtonEnabled={!(infoMessage && infoMessage !== "")}
     >
       <div className="product-information-container">
         <p>Producto: {props.nombre_producto}</p>
@@ -50,14 +67,19 @@ export const AddConfirmationModal = ({
         <p>Disponible: {props.cantidad_disponible}</p>
         <div className="quantity-container">
           <p className="quantity">Cantidad:</p>
-          <input
-            id="input-add-to-the-shopping-cart"
-            type="text"
-            name="quantity"
-            placeholder="Cantidad"
-            value={quantityToBuy}
-            onChange={handleQuantityValue}
-          />
+          <div className="input-and-info-label-container">
+            <input
+              id="input-add-to-the-shopping-cart"
+              type="text"
+              name="quantity"
+              placeholder="Cantidad"
+              value={quantityToBuy}
+              onChange={handleQuantityValue}
+            />
+            {infoMessage && infoMessage !== "" && (
+              <p className="info-label">{infoMessage}</p>
+            )}
+          </div>
         </div>
         <p>Importe: ${getTotal()}</p>
       </div>
