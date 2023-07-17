@@ -3,6 +3,7 @@ import { AddConfirmationModal } from "../AddConfirmationModal/AddConfirmationMod
 import Swal from "sweetalert2";
 
 import "./card.css";
+import { numberWithCommas } from "../../../../utils";
 
 export const ProductCard = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -28,7 +29,9 @@ export const ProductCard = (props) => {
         <div className="card-body">
           <h5 className="card-title">Producto: {props.nombre_producto}</h5>
           <div className="price-add-container">
-            <p className="card-text price">Precio: ${props.precio_unitario}</p>
+            <p className="card-text price">
+              Precio: ${numberWithCommas(props.precio_unitario, 2)}
+            </p>
             <AddConfirmationModal
               {...props}
               isModalVisible={isModalVisible}

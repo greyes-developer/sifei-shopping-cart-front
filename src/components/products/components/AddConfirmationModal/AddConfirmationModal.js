@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { numberWithCommas } from "../../../../utils";
 import { Modal } from "../../../shared/Modal/Modal";
 
 export const AddConfirmationModal = ({
@@ -63,7 +64,7 @@ export const AddConfirmationModal = ({
       <div className="product-information-container">
         <p>Producto: {props.nombre_producto}</p>
         <p>Clave: {props.id_producto}</p>
-        <p>Precio: ${props.precio_unitario}</p>
+        <p>Precio: ${numberWithCommas(props.precio_unitario, 2)}</p>
         <p>Disponible: {props.cantidad_disponible}</p>
         <div className="quantity-container">
           <p className="quantity">Cantidad:</p>
@@ -81,7 +82,7 @@ export const AddConfirmationModal = ({
             )}
           </div>
         </div>
-        <p>Importe: ${getTotal()}</p>
+        <p>Importe: ${numberWithCommas(getTotal())}</p>
       </div>
     </Modal>
   );

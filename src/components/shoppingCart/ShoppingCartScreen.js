@@ -8,6 +8,7 @@ import { Navbar } from "./components/navbar/Navbar";
 import { ProductsTable } from "./components/table/Table";
 
 import "./shoppingCart.css";
+import { numberWithCommas } from "../../utils";
 
 export const ShoppingCartScreen = () => {
   const todayDate = new Date().toLocaleDateString();
@@ -104,7 +105,7 @@ export const ShoppingCartScreen = () => {
         <h3 className="there-are-no-products">No hay productos agregados</h3>
       )}
       <div className="total-and-buy-container">
-        <p className="total-label">Total: ${total}</p>
+        <p className="total-label">Total: ${numberWithCommas(total)}</p>
         <button
           className={`btn ${
             products && products.length > 0 ? "btn-primary" : "btn-secondary"
